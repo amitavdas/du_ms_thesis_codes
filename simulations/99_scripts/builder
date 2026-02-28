@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# wget https://github.com/lammps/lammps/archive/refs/tags/stable_29Aug2024_update2.tar.gz
+
+v_original_dir="${PWD}"
+v_lammps_src="${v_original_dir}/lammps-29Aug2024"
+v_lammps_bin="${v_original_dir}/binaries"
+
+[ -d "${v_lammps_bin}" ] && rm -rf "${v_lammps_bin}"
+mkdir -p "${v_lammps_bin}"
+
+cd "${v_lammps_src}" || exit
+
+rm -rf build
+mkdir -p build
+
+cd build
+
+# -D BUILD_SHARED_LIBS=value   # yes or no (default)
+# that option causes lammps to not have all the packages, despite them being built
+# maybe because lammps was not installing the shared library, needs checking
+
+# -D DOWNLOAD_KIM=yes \
+
+cmake \
+	-C ../cmake/presets/most.cmake \
+	-D PKG_KIM=yes \
+	-D LAMMPS_EXCEPTIONS=on \
+	-D BUILD_LIB=on \
+	-D CMAKE_BUILD_TYPE=Release \
+	-D CMAKE_INSTALL_PREFIX="${v_lammps_bin}" \
+	-D Python_EXECUTABLE=/usr/bin/python3 \
+	../cmake
+
+cmake --build . -j $(($(nproc) - 1))
+
+cd ../tools/phonon/
+cmake -S . -B build
+cmake --build build
+
+# python lib
+cd ../../python/
+rm -rf dist
+python -m build
+
+cd "${v_lammps_src}/build" || exit
+
+make install

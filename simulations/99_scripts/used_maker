@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob
+
+for v_obj_1 in *; do
+
+        [ ! -d "$v_obj_1" ] && continue
+        cd "$v_obj_1" || exit
+
+        for v_obj_2 in *; do
+
+            [ ! -d "$v_obj_2" ] && continue
+            if [[ "$v_obj_2" =~ 'used' ]]; then
+            
+		gio trash used
+                ln -rs "$v_obj_2" used
+            fi
+
+        done
+        cd - || exit
+done

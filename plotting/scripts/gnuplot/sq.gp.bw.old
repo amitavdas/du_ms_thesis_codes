@@ -1,0 +1,249 @@
+ti_sq_data = '../data/[01][Ti]/sq.dat'
+ v_sq_data = '../data/[02][V]/sq.dat'
+cr_sq_data = '../data/[03][Cr]/sq.dat'
+mn_sq_data = '../data/[04][Mn]/sq.dat'
+fe_sq_data = '../data/[05][Fe]/sq.dat'
+co_sq_data = '../data/[06][Co]/sq.dat'
+ni_sq_data = '../data/[07][Ni]/sq.dat'
+cu_sq_data = '../data/[08][Cu]/sq.dat'
+
+ti_sq_exp_data = '../data/exp/3d_transition_sq/Ti_sq_Waseda1975.dat'
+ v_sq_exp_data = '../data/exp/3d_transition_sq/V_sq_Waseda1975.dat'
+cr_sq_exp_data = '../data/exp/3d_transition_sq/Cr_sq_Waseda1975.dat'
+mn_sq_exp_data = '../data/exp/3d_transition_sq/Mn_sq_Waseda1975.dat'
+fe_sq_exp_data = '../data/exp/3d_transition_sq/Fe_sq_Waseda1975.dat'
+co_sq_exp_data = '../data/exp/3d_transition_sq/Co_sq_Waseda1975.dat'
+ni_sq_exp_data = '../data/exp/3d_transition_sq/Ni_sq_Waseda1975.dat'
+cu_sq_exp_data = '../data/exp/3d_transition_sq/Cu_sq_Waseda1975.dat'
+
+set terminal eps enhanced background rgb 'white' \
+    size 6, 3.75                                 \
+    font "Times New Roman,12pt"
+
+set encoding iso_8859_1
+
+set output 'sq.eps'
+
+#: multiplot
+set multiplot
+
+#: tics
+set format x ""
+set xtics 2 nomirror
+set mxtics 2
+
+set ytics 2 font "Times New Roman,12pt"
+set ytics nomirror
+set mytics 2
+
+#: Colors
+
+#4878d0
+#ee854a
+#6acc64
+#d65f5f
+#956cb4
+#8c613c
+#dc7ec0
+#797979
+#d5bb67
+#82c6e2
+
+#: line styles
+
+l_w = 1
+
+set style line 11 dt 1 lw l_w lc "black"
+set style line 12 dt 2 lw l_w lc "black"
+set style line 13 dt 3 lw l_w lc "black"
+set style line 14 dt 4 lw l_w lc "black"
+set style line 15 dt 5 lw l_w lc "black"
+
+#: point styles
+set style line 17 pt 8 ps 0.5 lw 1 lc "black"
+set style line 16 pt 6 ps 0.3 lw 1 lc "black"
+
+#: margin
+set margins 8, 0, 1, 0
+
+#: x y
+dx = 0.5
+dy = 0.23
+
+#: dy offset
+dy_o = 0.07
+
+#: dx offset
+dx_o = -0.020
+
+#: dy offset for bottom plots
+dy_o_b = 0.05
+
+#: legends
+set key horizontal maxcols 3 font "Times New Roman,10"
+
+#: labels
+unset ylabel
+unset xlabel
+
+#: curve name position
+
+cx = 0.88
+cy = 0.4
+
+#: Ti
+
+set origin 0, dy * 3 + dy_o
+set size dx, dy
+
+set label 1 'Ti' at graph cx, cy font "Times New Roman,12"
+
+set yr [0 to 6]
+set xr [1 to  10]
+
+plot ti_sq_data     u 1:2  w l ls 11 title "IU",   \
+     ti_sq_data     u 1:3  w l ls 12 title "RT",   \
+     ti_sq_data     u 1:4  w l ls 13 title "SK",   \
+     ti_sq_data     u 1:5  w l ls 14 title "VS",   \
+     ti_sq_data     u 1:6  w l ls 15 title "FD",   \
+     ti_sq_data     u 7:8  w p ls 16 title "Sim.", \
+     ti_sq_exp_data u 1:2 every 4 w p ls 17 title "Exp.", \
+
+set origin 0, dy * 2 + dy_o
+set size dx, dy
+
+unset label 1
+set label 2 'V' at graph cx, cy font "Times New Roman,12"
+
+set xr [1 to  10]
+set yr [0 to 8]
+
+plot  v_sq_data     u 1:2  w l ls 11 title "IU",   \
+      v_sq_data     u 1:3  w l ls 12 title "RT",   \
+      v_sq_data     u 1:4  w l ls 13 title "SK",   \
+      v_sq_data     u 1:5  w l ls 14 title "VS",   \
+      v_sq_data     u 1:6  w l ls 15 title "FD",   \
+      v_sq_data     u 7:8  w p ls 16 title "Sim.", \
+      v_sq_exp_data u 1:2 every 3 w p ls 17 title "Exp.", \
+
+set origin 0, dy * 1 + dy_o
+set size dx, dy
+
+unset label 2
+set label 3 'Cr' at graph cx, cy font "Times New Roman,12"
+
+set yr [0 to 5]
+
+plot cr_sq_data     u 1:2  w l ls 11 title "IU",   \
+     cr_sq_data     u 1:3  w l ls 12 title "RT",   \
+     cr_sq_data     u 1:4  w l ls 13 title "SK",   \
+     cr_sq_data     u 1:5  w l ls 14 title "VS",   \
+     cr_sq_data     u 1:6  w l ls 15 title "FD",   \
+     cr_sq_data     u 7:8  w p ls 16 title "Sim.", \
+     cr_sq_exp_data u 1:2 every 3  w p ls 17 title "Exp.", \
+
+set xtics font "Times New Roman,12pt"
+
+set format x
+
+set origin 0, dy_o_b
+set size dx, dy + 0.02
+
+set bmargin 1.5
+
+unset label 3
+set label 4 'Mn' at graph cx, cy font "Times New Roman,12"
+
+set yr [0 to 4]
+
+plot mn_sq_data     u 1:2  w l ls 11 title "IU",   \
+     mn_sq_data     u 1:3  w l ls 12 title "RT",   \
+     mn_sq_data     u 1:4  w l ls 13 title "SK",   \
+     mn_sq_data     u 1:5  w l ls 14 title "VS",   \
+     mn_sq_data     u 1:6  w l ls 15 title "FD",   \
+     mn_sq_data     u 7:8  w p ls 16 title "Sim.", \
+     mn_sq_exp_data u 1:2 every 3  w p ls 17 title "Exp.", \
+
+set format x ""
+unset xlabel
+
+set ytics border
+# set format y ""
+unset ylabel
+
+set origin 0.5, dy * 3 + dy_o
+set size dx + dx_o, dy
+
+set lmargin 6
+set bmargin 1
+
+unset label 4
+set label 5 'Fe' at graph cx, cy font "Times New Roman,12"
+
+set yr [0 to 5.8]
+
+plot fe_sq_data     u 1:2  w l ls 11 title "IU",   \
+     fe_sq_data     u 1:3  w l ls 12 title "RT",   \
+     fe_sq_data     u 1:4  w l ls 13 title "SK",   \
+     fe_sq_data     u 1:5  w l ls 14 title "VS",   \
+     fe_sq_data     u 1:6  w l ls 15 title "FD",   \
+     fe_sq_data     u 7:8  w p ls 16 title "Sim.", \
+     fe_sq_exp_data u 1:2 every 4  w p ls 17 title "Exp.", \
+
+set origin 0.5, dy * 2 + dy_o
+set size dx + dx_o, dy
+
+unset label 5
+set label 6 'Co' at graph cx, cy font "Times New Roman,12"
+
+set yr [0 to 5.5]
+
+plot co_sq_data     u 1:2  w l ls 11 title "IU",   \
+     co_sq_data     u 1:3  w l ls 12 title "RT",   \
+     co_sq_data     u 1:4  w l ls 13 title "SK",   \
+     co_sq_data     u 1:5  w l ls 14 title "VS",   \
+     co_sq_data     u 1:6  w l ls 15 title "FD",   \
+     co_sq_data     u 7:8  w p ls 16 title "Sim.", \
+     co_sq_exp_data u 1:2 every 3  w p ls 17 title "Exp.", \
+
+set origin 0.5, dy * 1 + dy_o
+set size dx + dx_o, dy
+
+unset label 6
+set label 7 'Ni' at graph cx, cy font "Times New Roman,12"
+
+set yr [0 to 5]
+
+plot ni_sq_data     u 1:2  w l ls 11 title "IU",   \
+     ni_sq_data     u 1:3  w l ls 12 title "RT",   \
+     ni_sq_data     u 1:4  w l ls 13 title "SK",   \
+     ni_sq_data     u 1:5  w l ls 14 title "VS",   \
+     ni_sq_data     u 1:6  w l ls 15 title "FD",   \
+     ni_sq_data     u 7:8  w p ls 16 title "Sim.", \
+     ni_sq_exp_data u 1:2 every 3  w p ls 17 title "Exp.", \
+
+set xtics font "Times New Roman,12pt"
+
+set origin 0.5, dy_o_b
+set size dx + dx_o, dy + 0.02
+
+set format x
+
+set bmargin 1.5
+
+set label 98 "{/Times-Italic q} ({\305}^{-1})"                right at 1.0, -1.8 font "Times New Roman,14"
+set label 99 "{/Times-Italic S(q)}"  right at -10.3, 12 rotate by 90 font "Times New Roman,14"
+
+unset label 7
+set label 8 'Cu' at graph cx, cy font "Times New Roman,12"
+
+  set yr [0 to 5]
+
+plot cu_sq_data     u 1:2  w l ls 11 title "IU",   \
+     cu_sq_data     u 1:3  w l ls 12 title "RT",   \
+     cu_sq_data     u 1:4  w l ls 13 title "SK",   \
+     cu_sq_data     u 1:5  w l ls 14 title "VS",   \
+     cu_sq_data     u 1:6  w l ls 15 title "FD",   \
+     cu_sq_data     u 7:8  w p ls 16 title "Sim.", \
+     cu_sq_exp_data u 1:2 every 3  w p ls 17 title "Exp.", \
+

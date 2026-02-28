@@ -1,0 +1,61 @@
+ti_msd_data = '../data/[01][Ti]/msd.dat'
+ v_msd_data = '../data/[02][V]/msd.dat'
+cr_msd_data = '../data/[03][Cr]/msd.dat'
+mn_msd_data = '../data/[04][Mn]/msd.dat'
+fe_msd_data = '../data/[05][Fe]/msd.dat'
+co_msd_data = '../data/[06][Co]/msd.dat'
+ni_msd_data = '../data/[07][Ni]/msd.dat'
+cu_msd_data = '../data/[08][Cu]/msd.dat'
+
+#set terminal eps enhanced background rgb 'white' size 2.1, 2.1 font 'Times New Roman,10pt'
+set terminal eps enhanced background rgb 'white' \
+    size 4, 3                                    \
+    font "Times New Roman,12pt"
+
+set encoding iso_8859_1
+
+set output 'msd.eps'
+
+# set title "BS Potential Profile For Various LFF for Ti"
+
+#: range
+#set xr [2 to 6]
+#set yr [-0.0035 to 0.005]
+
+#: multiplot
+set multiplot
+
+#: tics
+#set format x ""
+set xtics 200 nomirror
+set mxtics 4
+
+set ytics 500 nomirror
+set mytics 4
+
+#: line styles
+set palette model RGB file seaborn_palette
+
+set style line 11 dt 2  lw 5 lc "#4878d0"
+set style line 12 dt 3  lw 5 lc "#ee854a"
+set style line 13 dt 4  lw 5 lc "#6acc64"
+set style line 14 dt 5  lw 5 lc "#d65f5f"
+set style line 15 dt 7  lw 5 lc "#956cb4"
+set style line 16 dt 8  lw 5 lc "#8c613c"
+set style line 17 dt 9  lw 5 lc "#dc7ec0"
+set style line 18 dt 10 lw 5 lc "#797979"
+                        
+set key left offset 3, 0
+
+set xlabel "time, {/Times-Italic t} (ps)" font "Times New Roman,14"
+set ylabel "Mean Squared Displacement ({\305}^{2})" font "Times New Roman,14"
+
+
+plot ti_msd_data u 1:2  w l ls 11 title "Ti",   \
+      v_msd_data u 1:2  w l ls 12 title "V",    \
+     cr_msd_data u 1:2  w l ls 13 title "Cr",   \
+     mn_msd_data u 1:2  w l ls 14 title "Mn",   \
+     fe_msd_data u 1:2  w l ls 15 title "Fe",   \
+     co_msd_data u 1:2  w l ls 16 title "Co",   \
+     ni_msd_data u 1:2  w l ls 17 title "Ni",   \
+     cu_msd_data u 1:2  w l ls 18 title "Cu",

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+exec &> >(tee "run.log")
+
+# define cpus to be used for the process
+v_cpuz='69-95'
+
+# runs the input file which has the same name an the directory containing it
+v_lammps_input_file="$(basename "${PWD}").inp"
+
+printf '%(D.%Y.%m.%d-T.%H.%M.%S%z)T\n' -1
+
+time taskset -c "${v_cpuz}" mpirun -np 27 lmp -in "${v_lammps_input_file}"
+
+printf '%(D.%Y.%m.%d-T.%H.%M.%S%z)T\n' -1

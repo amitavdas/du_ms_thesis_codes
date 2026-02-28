@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+export TS_SOCKET="${HOME}/Projects/ad/miscellaneous/sockets/ad.tsp.socket"
+
+tsp "${@}"

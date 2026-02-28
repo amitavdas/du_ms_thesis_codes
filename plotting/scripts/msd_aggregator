@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob
+
+v_source='/home/bari/HWD/mounts/temp/documents/Education/[00][Thesis]/codes/Lab/simulations/00_Metals/'
+v_source_file="${v_source}""/${1}/used/msd_sim.dat"
+
+cp "${v_source_file}" "msd.dat"

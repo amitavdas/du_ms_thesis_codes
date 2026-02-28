@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+
+import sys
+import numpy as np
+
+#: sys.argv[0] is always the script name
+
+tgr_parent_dir = "/home/bari/HWD/mounts/temp/documents/Education/[00][Thesis]/codes/Lab/Codes_2"
+sgr_parent_dir = "/home/bari/HWD/mounts/temp/documents/Education/[00][Thesis]/codes/Lab/simulations/00_Metals/"
+metal_dir = sys.argv[1]
+
+lff_dir = "IU"
+filename = "aq.dat"
+#: pair correlation function file
+pcf_file = tgr_parent_dir + '/' + lff_dir + '/' + metal_dir + '/' + filename
+
+[ wn, sq_iu ] = np.loadtxt(pcf_file, usecols=(0, 2), unpack=True)
+
+lff_dir = 'RT'
+pcf_file = tgr_parent_dir + '/' + lff_dir + '/' + metal_dir + '/' + filename
+[ wn, sq_rt ] = np.loadtxt(pcf_file, usecols=(0, 2), unpack=True)
+
+lff_dir = 'SR'
+pcf_file = tgr_parent_dir + '/' + lff_dir + '/' + metal_dir + '/' + filename
+[ wn, sq_sr ] = np.loadtxt(pcf_file, usecols=(0, 2), unpack=True)
+
+lff_dir = 'VS'
+pcf_file = tgr_parent_dir + '/' + lff_dir + '/' + metal_dir + '/' + filename
+[ wn, sq_vs ] = np.loadtxt(pcf_file, usecols=(0, 2), unpack=True)
+
+lff_dir = 'FD'
+pcf_file = tgr_parent_dir + '/' + lff_dir + '/' + metal_dir + '/' + filename
+[ wn, sq_fd ] = np.loadtxt(pcf_file, usecols=(0, 2), unpack=True)
+
+filename = "sq_from_rdf_from_trajectory.dat"
+pcf_file = sgr_parent_dir + '/' + metal_dir + '/used/' + filename
+[ s_q, s_sq ] = np.loadtxt(pcf_file, usecols=(0, 1), unpack=True)
+
+max_len = len(wn)
+
+# fill = np.nan
+# sq_iu_padded  = np.pad(sq_iu, (0, abs(max_len - len(sq_iu))), 'constant', constant_values=fill)
+# sq_rt_padded  = np.pad(sq_rt, (0, abs(max_len - len(sq_rt))), 'constant', constant_values=fill)
+# sq_sr_padded  = np.pad(sq_sr, (0, abs(max_len - len(sq_sr))), 'constant', constant_values=fill)
+# sq_vs_padded  = np.pad(sq_vs, (0, abs(max_len - len(sq_vs))), 'constant', constant_values=fill)
+# sq_fd_padded  = np.pad(sq_fd, (0, abs(max_len - len(sq_fd))), 'constant', constant_values=fill)
+# wn_padded     = np.pad(wn,    (0, abs(max_len - len(wn))),    'constant', constant_values=fill)
+# 
+# sq_data_file = "sq.dat"
+# np.savetxt(sq_data_file, np.column_stack((wn_padded, sq_iu_padded, sq_rt_padded, sq_sr_padded, sq_vs_padded, sq_fd_padded, s_q, s_sq)), newline='\n', fmt='%s')
+
+fill = np.nan
+s_sq_padded  = np.pad(s_sq, (0, abs(max_len - len(s_sq))), 'constant', constant_values=fill)
+s_q_padded   = np.pad(s_q,  (0, abs(max_len - len(s_q))),  'constant', constant_values=fill)
+
+sq_data_file = "sq.dat"
+np.savetxt(sq_data_file, np.column_stack((wn, sq_iu, sq_rt, sq_sr, sq_vs, sq_fd, s_q_padded, s_sq_padded)), newline='\n', fmt='%s')

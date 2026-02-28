@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob
+
+for v_object in ../data/*; do
+    if [ -d "$v_object" ]; then
+
+        if [[ $v_object =~ 'scripts' || $v_object =~ 'exp' || $v_object =~ 'miscellaneous' ]]; then
+            continue
+        fi
+
+        cd "$v_object" || exit
+
+        rm * &> /dev/null
+
+        cd - || exit
+    fi
+done

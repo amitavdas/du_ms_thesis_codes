@@ -1,0 +1,341 @@
+ti_vr_data = '../data/[01][Ti]/vr.dat'
+ v_vr_data = '../data/[02][V]/vr.dat'
+cr_vr_data = '../data/[03][Cr]/vr.dat'
+mn_vr_data = '../data/[04][Mn]/vr.dat'
+fe_vr_data = '../data/[05][Fe]/vr.dat'
+co_vr_data = '../data/[06][Co]/vr.dat'
+ni_vr_data = '../data/[07][Ni]/vr.dat'
+cu_vr_data = '../data/[08][Cu]/vr.dat'
+
+#set terminal eps enhanced background rgb 'white' size 2.1, 2.1 font 'Times New Roman,10pt'
+set terminal eps enhanced background rgb 'white' \
+    size 6, 3                                    \
+    font "Times New Roman,12pt"
+
+set encoding iso_8859_1
+
+set output 'vr.eps'
+
+# set title "BS Potential Profile For Various LFF for Ti"
+
+#: range
+#set xr [2 to 6]
+#set yr [-0.008 to 0.005]
+
+
+xr_uf = 2
+xr_ut = 6
+
+yr_uf = -0.0075
+yr_ut = 0.005
+
+set xr [xr_uf to xr_ut]
+set yr [yr_uf to yr_ut]
+
+#: multiplot
+set multiplot
+
+#: tics
+set format x ""
+set xtics 1 nomirror
+set mxtics 4
+
+set ytics 0.0025 font "Times New Roman,12pt"
+set ytics nomirror
+set mytics 2
+
+#: line styles
+
+l_w = 3
+
+set style line 11 dt 3 lw l_w lc "black"
+set style line 12 dt 2 lw l_w lc "black"
+set style line 13 dt 1 lw l_w lc "black"
+set style line 14 dt 4 lw l_w lc "black"
+set style line 15 dt 5 lw l_w lc "black"
+
+#: margin
+#: l r b t
+set margins 1, 0, 0, 0
+
+#: x y
+dx = 0.225 
+dy = 0.488
+
+s_dx = 0.22
+s_dy = 0.4
+
+s_z_dx = 0.15
+s_z_dy = 0.2
+
+
+#: offsets
+dx_o = 0.09
+dy_o = 0.07
+
+dx_zo = 0.055
+dy_zo = 0.17
+
+#: dy offset for bottom plots
+dy_o_b = 0.13
+
+
+#: legends
+set key at screen 0.8645, 1.0115 horizontal columns 6
+
+#: labels
+unset ylabel
+unset xlabel
+
+label_x = 0.85
+label_y = 0.15
+
+set origin 0 + dx_o, dy * 1 + dy_o
+set size s_dx, s_dy
+
+set label 98 "{/Times-Italic r} (\305)"    right at graph 2.23, -1.30 font "Times New Roman,14"
+set label 99 "{/Times-Italic u_{eff}} (r)" right at graph -0.44, 0.15 rotate by 90 font "Times New Roman,14"
+
+set label 1 'Ti' at graph label_x, label_y font "Times New Roman,12"
+
+plot ti_vr_data u 1:5  w l ls 14 title "VS",   \
+     ti_vr_data u 1:3  w l ls 12 title "RT",   \
+     ti_vr_data u 1:2  w l ls 11 title "IU",   \
+     ti_vr_data u 1:6  w l ls 15 title "FD",   \
+     ti_vr_data u 1:4  w l ls 13 title "SK",  \
+
+unset key # right bottom
+
+unset label 98
+unset label 99
+
+set origin 0 + dx_o + dx_zo, dy * 1 + dy_o + dy_zo
+set size s_z_dx, s_z_dy
+
+set xr [2.5 to 4.5 ]
+set yr [0.064 to 0.075]
+
+unset label 1
+
+#plot ti_vr_data u 1:5  w l ls 14 title "VS",   \
+#     ti_vr_data u 1:3  w l ls 12 title "RT",   \
+#     ti_vr_data u 1:2  w l ls 11 title "IU",   \
+#     ti_vr_data u 1:6  w l ls 15 title "FD",   \
+#     ti_vr_data u 1:4  w l ls 13 title "SK",  \
+
+set origin dx * 1 + dx_o, dy * 1 + dy_o
+set size s_dx, s_dy
+
+set label 2 'V' at graph label_x, label_y font "Times New Roman,12"
+
+set xr [xr_uf to xr_ut]
+set yr [yr_uf to yr_ut]
+
+set format y ""
+
+plot  v_vr_data u 1:5  w l ls 14 title "VS",   \
+      v_vr_data u 1:3  w l ls 12 title "RT",   \
+      v_vr_data u 1:2  w l ls 11 title "IU",   \
+      v_vr_data u 1:6  w l ls 15 title "FD",   \
+      v_vr_data u 1:4  w l ls 13 title "SK"
+
+set origin dx * 1 + dx_o + dx_zo, dy * 1 + dy_o + dy_zo
+set size s_z_dx, s_z_dy
+
+set xr [2.85 to 4.45 ]
+set yr [0.0745 to 0.082]
+
+unset label 2
+
+#plot  v_vr_data u 1:5  w l ls 14 title "VS",   \
+#      v_vr_data u 1:3  w l ls 12 title "RT",   \
+#      v_vr_data u 1:2  w l ls 11 title "IU",   \
+#      v_vr_data u 1:6  w l ls 15 title "FD",   \
+#      v_vr_data u 1:4  w l ls 13 title "SK"
+
+set origin dx * 2 + dx_o, dy * 1 + dy_o
+set size s_dx, s_dy
+
+set label 3 'Cr' at graph label_x, label_y font "Times New Roman,12"
+
+set xr [xr_uf to xr_ut]
+set yr [yr_uf to yr_ut]
+
+plot cr_vr_data u 1:5  w l ls 14 title "VS",   \
+     cr_vr_data u 1:3  w l ls 12 title "RT",   \
+     cr_vr_data u 1:2  w l ls 11 title "IU",   \
+     cr_vr_data u 1:6  w l ls 15 title "FD",   \
+     cr_vr_data u 1:4  w l ls 13 title "SK",  \
+
+set origin dx * 2 + dx_o + dx_zo, dy * 1 + dy_o + dy_zo
+set size s_z_dx, s_z_dy
+
+set xr [3.05 to 5.10 ]
+set yr [0.0585 to 0.065]
+
+unset label 3
+
+#plot cr_vr_data u 1:5  w l ls 14 title "VS",   \
+#     cr_vr_data u 1:3  w l ls 12 title "RT",   \
+#     cr_vr_data u 1:2  w l ls 11 title "IU",   \
+#     cr_vr_data u 1:6  w l ls 15 title "FD",   \
+#     cr_vr_data u 1:4  w l ls 13 title "SK",  \
+
+set xtics font "Times New Roman,12pt"
+
+set origin dx * 3 + dx_o, dy * 1 + dy_o
+set size s_dx, s_dy
+
+set label 4 'Mn' at graph label_x, label_y font "Times New Roman,12"
+
+set xr [xr_uf to xr_ut]
+set yr [yr_uf to yr_ut]
+
+plot mn_vr_data u 1:5  w l ls 14 title "VS",   \
+     mn_vr_data u 1:3  w l ls 12 title "RT",   \
+     mn_vr_data u 1:2  w l ls 11 title "IU",   \
+     mn_vr_data u 1:6  w l ls 15 title "FD",   \
+     mn_vr_data u 1:4  w l ls 13 title "SK",  \
+
+set origin dx * 3 + dx_o + dx_zo, dy * 1 + dy_o + dy_zo
+set size s_z_dx, s_z_dy
+
+set xr [3.17 to 5.19 ]
+set yr [0.0485 to 0.0535]
+
+unset label 4
+
+#plot mn_vr_data u 1:5  w l ls 14 title "VS",   \
+#     mn_vr_data u 1:3  w l ls 12 title "RT",   \
+#     mn_vr_data u 1:2  w l ls 11 title "IU",   \
+#     mn_vr_data u 1:6  w l ls 15 title "FD",   \
+#     mn_vr_data u 1:4  w l ls 13 title "SK",  \
+
+
+set format x ""
+unset xlabel
+
+set ytics border
+set format y
+
+unset ylabel
+
+set origin 0 + dx_o, dy_o_b
+set size s_dx, s_dy
+
+set format x
+
+set label 5 'Fe' at graph label_x, label_y font "Times New Roman,12"
+
+set xr [xr_uf to xr_ut]
+set yr [yr_uf to yr_ut]
+
+plot fe_vr_data u 1:5  w l ls 14 title "VS",   \
+     fe_vr_data u 1:3  w l ls 12 title "RT",   \
+     fe_vr_data u 1:2  w l ls 11 title "IU",   \
+     fe_vr_data u 1:6  w l ls 15 title "FD",   \
+     fe_vr_data u 1:4  w l ls 13 title "SK",  \
+
+set origin dx * 0 + dx_o + dx_zo, dy * 0 + dy_o_b + dy_zo
+set size s_z_dx, s_z_dy
+
+set xr [3.27 to 5.25 ]
+set yr [0.0645 to 0.0710]
+
+unset label 5
+
+#plot fe_vr_data u 1:5  w l ls 14 title "VS",   \
+#     fe_vr_data u 1:3  w l ls 12 title "RT",   \
+#     fe_vr_data u 1:2  w l ls 11 title "IU",   \
+#     fe_vr_data u 1:6  w l ls 15 title "FD",   \
+#     fe_vr_data u 1:4  w l ls 13 title "SK",  \
+
+
+set origin dx * 1 + dx_o, dy_o_b
+set size s_dx, s_dy
+
+set format y ""
+
+set label 6 'Co' at graph label_x, label_y font "Times New Roman,12"
+
+set xr [xr_uf to xr_ut]
+set yr [yr_uf to yr_ut]
+
+plot co_vr_data u 1:5  w l ls 14 title "VS",   \
+     co_vr_data u 1:3  w l ls 12 title "RT",   \
+     co_vr_data u 1:2  w l ls 11 title "IU",   \
+     co_vr_data u 1:6  w l ls 15 title "FD",   \
+     co_vr_data u 1:4  w l ls 13 title "SK",  \
+
+set origin dx * 1 + dx_o + dx_zo, dy * 0 + dy_o_b + dy_zo
+set size s_z_dx, s_z_dy
+
+set xr [3.5 to 5.9]
+set yr [0.073 to 0.0785]
+
+unset label 6
+
+#plot co_vr_data u 1:5  w l ls 14 title "VS",   \
+#     co_vr_data u 1:3  w l ls 12 title "RT",   \
+#     co_vr_data u 1:2  w l ls 11 title "IU",   \
+#     co_vr_data u 1:6  w l ls 15 title "FD",   \
+#     co_vr_data u 1:4  w l ls 13 title "SK",  \
+
+set origin dx * 2 + dx_o, dy_o_b
+set size s_dx, s_dy
+
+set label 7 'Ni' at graph label_x, label_y font "Times New Roman,12"
+
+set xr [xr_uf to xr_ut]
+set yr [yr_uf to yr_ut]
+
+plot ni_vr_data u 1:5  w l ls 14 title "VS",   \
+     ni_vr_data u 1:3  w l ls 12 title "RT",   \
+     ni_vr_data u 1:2  w l ls 11 title "IU",   \
+     ni_vr_data u 1:6  w l ls 15 title "FD",   \
+     ni_vr_data u 1:4  w l ls 13 title "SK",  \
+
+set origin dx * 2 + dx_o + dx_zo + 0.04, dy * 0 + dy_o_b + dy_zo * 1.225
+set size s_z_dx * 0.73, s_z_dy * 0.8
+
+set xr [3.67 to 6.25 ]
+set yr [0.0810 to 0.0865]
+
+unset label 7
+
+#plot ni_vr_data u 1:5  w l ls 14 title "VS",   \
+#     ni_vr_data u 1:3  w l ls 12 title "RT",   \
+#     ni_vr_data u 1:2  w l ls 11 title "IU",   \
+#     ni_vr_data u 1:6  w l ls 15 title "FD",   \
+#     ni_vr_data u 1:4  w l ls 13 title "SK",  \
+
+set xtics font "Times New Roman,12pt"
+
+set origin dx * 3 + dx_o, dy_o_b
+set size s_dx, s_dy
+
+unset label 7
+set label 8 'Cu' at graph label_x, label_y font "Times New Roman,12"
+
+set xr [xr_uf to xr_ut]
+set yr [yr_uf to yr_ut]
+
+plot cu_vr_data u 1:5  w l ls 14 title "VS",   \
+     cu_vr_data u 1:3  w l ls 12 title "RT",   \
+     cu_vr_data u 1:2  w l ls 11 title "IU",   \
+     cu_vr_data u 1:6  w l ls 15 title "FD",   \
+     cu_vr_data u 1:4  w l ls 13 title "SK",  \
+
+set origin dx * 3 + dx_o + dx_zo + 0.04, dy * 0 + dy_o_b + dy_zo * 1.225
+set size s_z_dx * 0.73, s_z_dy * 0.8
+
+set xr [4.27 to 7.25 ]
+set yr [0.097 to 0.102]
+
+unset label 8
+
+#plot cu_vr_data u 1:5  w l ls 14 title "VS",   \
+#     cu_vr_data u 1:3  w l ls 12 title "RT",   \
+#     cu_vr_data u 1:2  w l ls 11 title "IU",   \
+#     cu_vr_data u 1:6  w l ls 15 title "FD",   \
+#     cu_vr_data u 1:4  w l ls 13 title "SK",  \

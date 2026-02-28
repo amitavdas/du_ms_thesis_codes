@@ -1,0 +1,65 @@
+#!/usr/bin/runvenv sketch
+
+import numpy as np
+import sklearn
+
+import matplotlib
+matplotlib.use('Agg')
+
+import matplotlib.pyplot as plt
+
+#: lammps simulation was in units of metal
+#: time in ps
+#: distance in Angstorms
+
+[time_steps, msd] = np.loadtxt('lammps_msd.dat', skiprows=2, usecols=(0, 4), unpack=True)
+
+#: this has to be defined according to how data was collected
+time_step_size = 0.001 # in ps
+
+time_steps = (time_steps - time_steps[0]) * time_step_size
+
+linreg = sklearn.linear_model.LinearRegression()
+
+linreg.fit(time_steps.reshape(-1,1), msd)
+
+D = linreg.coef_[0]/6
+
+#: 1ps = 10 ** (-12)s
+#: 1(A**2) = 10 ** (-16)(cm**2)
+#: 1(A**2)/1ps = 10 ** (-16)(cm**2) / 10 ** (-12)s = 10 ** (-4) (cm**2)/s
+
+D = D * (10**(-4))
+print("Time Step Size: ")
+print("Diffusion coefficient: D = ", D, "in units of (cm**2)/s")
+print("Diffusion coefficient: D = ", D * (10**5), "in units of (10**-5)(cm**2)/s")
+
+def msd_line(x):
+    [ m ] = linreg.coef_
+    return m*x + linreg.intercept_
+
+fx_1, ax_1 = plt.subplots()
+ax_1.plot(time_steps, msd_line(time_steps), color='#C0392B')
+ax_1.set_title('Fitted MSD curve')
+ax_1.set_xlabel('time (ps)')
+ax_1.set_ylabel('MSD (Angstorm^2)')
+plt.savefig('lammps_msd.pdf')
+
+fx_2, ax_2 = plt.subplots()
+ax_2.plot(time_steps, msd, color='#C0392B')
+ax_2.set_title('Original MSD curve')
+ax_2.set_xlabel('time (ps)')
+ax_2.set_ylabel('MSD (Angstorm^2)')
+
+plt.savefig('lammps_msd_original.pdf')
+
+fx_3, ax_3 = plt.subplots()
+ax_3.plot(time_steps, msd, color='#E67E22', alpha=0.2, linestyle='none', marker='o')
+ax_3.plot(time_steps, msd_line(time_steps), color='#C0392B')
+ax_3.set_title('MSD curve')
+ax_3.set_xlabel('time (ps)')
+ax_3.set_ylabel('MSD (Angstorm^2)')
+
+plt.savefig('lammps_msd_both.pdf')
+
+np.savetxt('msd_sim.dat', np.column_stack((time_steps, msd_line(time_steps), msd)), newline='\n', fmt='%s')

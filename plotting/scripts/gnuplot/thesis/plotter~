@@ -1,0 +1,140 @@
+#!/usr/bin/env bash
+
+v_debug=0
+
+vr_iu_gp="${PWD}/vr/vr.iu.gp"
+vr_vs_gp="${PWD}/vr/vr.vs.gp"
+vr_fd_gp="${PWD}/vr/vr.fd.gp"
+vr_rt_gp="${PWD}/vr/vr.rt.gp"
+vr_sk_gp="${PWD}/vr/vr.sk.gp"
+
+vr_Ti_gp="${PWD}/vr/vr.Ti.gp"
+vr_V_gp="${PWD}/vr/vr.V.gp"
+vr_Cr_gp="${PWD}/vr/vr.Cr.gp"
+vr_Mn_gp="${PWD}/vr/vr.Mn.gp"
+vr_Fe_gp="${PWD}/vr/vr.Fe.gp"
+vr_Co_gp="${PWD}/vr/vr.Co.gp"
+vr_Ni_gp="${PWD}/vr/vr.Ni.gp"
+vr_Cu_gp="${PWD}/vr/vr.Cu.gp"
+
+vr_V_color_gp="${PWD}/vr/vr.V.color.gp"
+vr_Cu_color_gp="${PWD}/vr/vr.Cu.color.gp"
+
+vq_V_color_gp="${PWD}/vr/vq.V.color.gp"
+vq_Fe_color_gp="${PWD}/vr/vq.Fe.color.gp"
+
+vq_Ti_gp="${PWD}/vr/vq.Ti.gp"
+vq_V_gp="${PWD}/vr/vq.V.gp"
+vq_Cr_gp="${PWD}/vr/vq.Cr.gp"
+vq_Mn_gp="${PWD}/vr/vq.Mn.gp"
+vq_Fe_gp="${PWD}/vr/vq.Fe.gp"
+vq_Co_gp="${PWD}/vr/vq.Co.gp"
+vq_Ni_gp="${PWD}/vr/vq.Ni.gp"
+vq_Cu_gp="${PWD}/vr/vq.Cu.gp"
+
+
+gr_Ti_gp="${PWD}/gr/gr.Ti.gp"
+gr_V_gp="${PWD}/gr/gr.V.gp"
+gr_Cr_gp="${PWD}/gr/gr.Cr.gp"
+gr_Mn_gp="${PWD}/gr/gr.Mn.gp"
+gr_Fe_gp="${PWD}/gr/gr.Fe.gp"
+gr_Co_gp="${PWD}/gr/gr.Co.gp"
+gr_Ni_gp="${PWD}/gr/gr.Ni.gp"
+gr_Cu_gp="${PWD}/gr/gr.Cu.gp"
+
+sq_Ti_gp="${PWD}/sq/sq.Ti.gp"
+sq_V_gp="${PWD}/sq/sq.V.gp"
+sq_Cr_gp="${PWD}/sq/sq.Cr.gp"
+sq_Mn_gp="${PWD}/sq/sq.Mn.gp"
+sq_Fe_gp="${PWD}/sq/sq.Fe.gp"
+sq_Co_gp="${PWD}/sq/sq.Co.gp"
+sq_Ni_gp="${PWD}/sq/sq.Ni.gp"
+sq_Cu_gp="${PWD}/sq/sq.Cu.gp"
+
+sq_Cu_color_gp="${PWD}/sq/sq.Cu.color.gp"
+sq_Mn_color_gp="${PWD}/sq/sq.Mn.color.gp"
+
+msd_gp="${PWD}/msd.gp"
+dc_gp="${PWD}/dc.gp"
+
+bs_r_c_gp="${PWD}/bs_r_c.gp"
+bs_a_gp="${PWD}/bs_a.gp"
+
+gr_hsf_plt="${PWD}/gr_hsf.py"
+
+lwca_approximation_plt="${PWD}/lwca_approximation.py"
+
+v_seaborn_palette="${PWD}/seaborn.palette"
+
+cd ../../../plots/thesis || exit
+
+gnuplot "${sq_Cu_color_gp}"
+gnuplot "${sq_Mn_color_gp}"
+
+#gnuplot "${sq_Cu_gp}"
+#gnuplot "${sq_Ni_gp}"
+#gnuplot "${sq_Co_gp}"
+#gnuplot "${sq_Fe_gp}"
+#gnuplot "${sq_Mn_gp}"
+#gnuplot "${sq_Cr_gp}"
+#gnuplot "${sq_Ti_gp}"
+#gnuplot "${sq_V_gp}"
+#
+#gnuplot "${gr_Cu_gp}"
+#gnuplot "${gr_Ni_gp}"
+#gnuplot "${gr_Co_gp}"
+#gnuplot "${gr_Fe_gp}"
+#gnuplot "${gr_Mn_gp}"
+#gnuplot "${gr_Cr_gp}"
+#gnuplot "${gr_Ti_gp}"
+#gnuplot "${gr_V_gp}"
+#
+#gnuplot "${dc_gp}"
+#gnuplot "${vr_iu_gp}"
+#gnuplot "${vr_vs_gp}"
+#gnuplot "${vr_fd_gp}"
+#gnuplot "${vr_rt_gp}"
+#gnuplot "${vr_sk_gp}"
+#
+#gnuplot "${msd_gp}"
+#
+#gnuplot "${bs_r_c_gp}"
+#gnuplot "${bs_a_gp}"
+#"${gr_hsf_plt}"
+#"${lwca_approximation_plt}"
+
+#gnuplot "${vr_Ti_gp}"
+#gnuplot "${vr_V_gp}"
+#gnuplot "${vr_Cr_gp}"
+#gnuplot "${vr_Mn_gp}"
+#gnuplot "${vr_Fe_gp}"
+#gnuplot "${vr_Co_gp}"
+#gnuplot "${vr_Ni_gp}"
+#gnuplot "${vr_Cu_gp}"
+
+gnuplot "${vr_V_color_gp}"
+gnuplot "${vr_Cu_color_gp}"
+
+gnuplot "${vq_V_color_gp}"
+gnuplot "${vq_Fe_color_gp}"
+
+
+# gnuplot "${vq_Ti_gp}"
+# gnuplot "${vq_V_gp}"
+# gnuplot "${vq_Cr_gp}"
+# gnuplot "${vq_Mn_gp}"
+# gnuplot "${vq_Fe_gp}"
+# gnuplot "${vq_Co_gp}"
+# gnuplot "${vq_Ni_gp}"
+# gnuplot "${vq_Cu_gp}"
+
+for i in *.eps; do
+    epstopdf "${i}"
+done
+
+v_destination="/home/bari/HWD/mounts/temp/documents/Education/[00][Thesis]/codes/Docs/thesis/data"
+
+if [[ -d "$v_destination" && $v_debug -eq 0 ]]; then
+    cp -f ./*.eps "$v_destination"'/'
+    cp -f ./*.pdf "$v_destination"'/'
+fi

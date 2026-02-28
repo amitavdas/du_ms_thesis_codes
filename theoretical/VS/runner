@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob
+
+for i in *; do
+    if [ -d "${i}" ]; then
+        cd "${i}"
+        echo "${i}"
+#       ../monto
+#       ../lwca
+#       ../vq_spherical.py
+#       ../lwsqgr
+        ../amitav
+#       ../sq_generator.py
+        cd -
+    fi
+done

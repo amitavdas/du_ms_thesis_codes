@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob
+
+v_original_dir=$PWD
+
+for i in *; do
+    if [ -d "${i}" ]; then
+        cd "${i}"
+	echo "${i}"
+	rm lwsqgr* &> /dev/null
+	rm mahir* &> /dev/null
+	rm ss.f95 small.f95 &> /dev/null
+	rm HC.DAT hardc.f95 hardc &> /dev/null
+	rm j k l p u &> /dev/null
+	rm *.pdf &> /dev/null
+	rm diff.dat &> /dev/null
+	rm *.py &> /dev/null
+	rm monto MONTO.FOR &> /dev/null
+	rm amitav AMITAV.F90 &> /dev/null
+	rm lwca LWCA.FOR &> /dev/null
+	cd -
+    fi
+done

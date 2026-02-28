@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob
+
+v_original_dir="${PWD}"
+
+v_cpuz='66-92'
+
+exec &> >(tee ./"run.log")
+
+for v_dir in "${v_original_dir}"/*; do
+    [ ! -d "${v_dir}" ] && continue
+
+    cd "${v_dir}" || exit
+    
+    v_lammps_input_file="$(basename "${v_dir}").inp"
+    
+    echo "Executing ${v_lammps_input_file}"
+    
+    printf '%(D.%Y.%m.%d-T.%H.%M.%S%z)T\n' -1
+
+    time taskset -c "${v_cpuz}" mpirun -np 27 lmp -in "${v_lammps_input_file}"
+    
+    cd "${v_original_dir}" || exit
+done
+
+#cd "${v_original_dir}/V_test_dp_dt"
+#./run V.inp
+#
+#cd "${v_original_dir}/V_test_dp_5"
+#./run V.inp

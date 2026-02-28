@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob
+
+ v_vr_agg="${PWD}/vr_aggregator"
+ v_vq_agg="${PWD}/vq_aggregator"
+ v_gr_agg="${PWD}/gr_aggregator"
+ v_sq_agg="${PWD}/sq_aggregator"
+v_msd_agg="${PWD}/msd_aggregator"
+
+
+for v_object in ../data/*; do
+
+    if [ -d "$v_object" ]; then
+
+        if [[ $v_object =~ 'scripts' || $v_object =~ 'exp' || $v_object =~ 'miscellaneous' ]]; then
+            continue
+        fi
+
+        cd "$v_object" || exit
+
+        "$v_vr_agg"  "$(basename "$v_object")"
+        "$v_vq_agg"  "$(basename "$v_object")"
+        "$v_gr_agg"  "$(basename "$v_object")"
+        "$v_sq_agg"  "$(basename "$v_object")"
+        "$v_msd_agg" "$(basename "$v_object")"
+
+
+        cd - || exit &> /dev/null
+    fi
+done

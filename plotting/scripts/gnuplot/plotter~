@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+v_debug=0
+
+dc_gp="${PWD}/dc.gp"
+vr_gp="${PWD}/vr.gp"
+vq_gp="${PWD}/vq.gp"
+gr_gp="${PWD}/gr.gp"
+sq_gp="${PWD}/sq.gp"
+msd_gp="${PWD}/msd.gp"
+
+v_seaborn_palette="${PWD}/seaborn.palette"
+
+cd ../../plots
+gnuplot "${dc_gp}"
+gnuplot "${gr_gp}"
+gnuplot "${sq_gp}"
+gnuplot "${vr_gp}"
+gnuplot "${vq_gp}"
+gnuplot -e "seaborn_palette='${v_seaborn_palette}'" "${msd_gp}"
+epstopdf dc.eps
+epstopdf vr.eps
+epstopdf vq.eps
+epstopdf gr.eps
+epstopdf sq.eps
+epstopdf msd.eps
+
+v_destination="/home/bari/HWD/mounts/temp/documents/Education/[00][Thesis]/codes/Docs/paper/Physica-B_Revision"
+
+if [[ -d "$v_destination" && $v_debug -eq 0 ]]; then
+    cp -f ./*.eps "$v_destination"'/'
+fi
