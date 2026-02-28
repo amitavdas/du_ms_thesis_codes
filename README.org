@@ -1,2 +1,2 @@
-This repository contains the codes I used for my Master's thesis at the University of Dhaka.
-I only included the codes that I wrote myself, for obvious reasons. Thank you for visiting.
+This repository contains the codes I used for my Master's thesis at the *University of Dhaka*.
+I only included the codes that I wrote *myself*, for obvious reasons. Thank you for visiting.
