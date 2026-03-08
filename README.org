@@ -1,3 +1,1 @@
 This repository contains the codes I used for my Master's thesis at the *University of Dhaka*.
-
-For obvious reasons, I only included codes that I wrote *myself* and own fully. Thank you for visiting.
